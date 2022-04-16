@@ -8,11 +8,10 @@ endif
 call plug#begin()
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'doums/darcula'
 Plug 'easymotion/vim-easymotion'
+Plug 'gruvbox-community/gruvbox'
 Plug 'haya14busa/incsearch.vim'
 Plug 'inkarkat/vim-ReplaceWithRegister'
-Plug 'inkarkat/vim-ShowTrailingWhitespace'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -20,6 +19,8 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'majutsushi/tagbar'
 Plug 'markonm/traces.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-sensible'
@@ -56,17 +57,19 @@ nnoremap <Leader>t :Tags<CR>
 nnoremap <silent><Leader>r :call VimuxRunCommandInDir('./' . fnamemodify(bufname('%'), ':t'), 0)<CR>
 nnoremap <Leader>p :VimuxPromptCommand<CR>
 
-" Incremental search highlighting
+" Incremental search highlighting and easymotion
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 nnoremap <silent><expr> <Leader>/ (&hlsearch && v:hlsearch ? ':nohlsearch' : ':set hlsearch')."\n"
 set hlsearch
+nmap <Space> <Plug>(easymotion-s)
 
 " Eye candy
-let g:lightline = { 'active': { 'left': [ [ 'mode', 'paste' ],
+highlight Normal ctermbg=black ctermfg=white
+set background=dark
+colorscheme gruvbox
+let g:lightline = {'colorscheme': 'gruvbox', 'active': { 'left': [ [ 'mode', 'paste' ],
 	\ [ 'readonly', 'filename', 'modified', 'tagbar' ] ] },
 	\ 'component': { 'tagbar': '%{tagbar#currenttag("%s", "", "f")}' } }
-set colorcolumn=100
-colorscheme darcula
-highlight ShowTrailingWhitespace ctermbg=52 guibg=#532B2E
+set colorcolumn=120
